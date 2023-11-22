@@ -2,26 +2,27 @@ import psycopg2
 import pandas as pd
 import os
 
-cache_dir = '/Users/konstantinos/Desktop/Clone Generalization/binary files/'
-
-# Database connection parameters
-db_params = {
-    "host"    : "localhost",
-    "database": "bcb",
-    "user"    : "konstantinos",
-    "password": "1234"
-}
-
-# Establish connection
-conn = psycopg2.connect(**db_params)
-
-# # Get all functionalities
-# functionalities = pd.read_sql_query("SELECT * from functionalities", conn)
+cache_dir = '/Users/konstantinos/Desktop/Clone Generalization/binary files/' # my Mac
+if not os.path.isdir(cache_dir):
+    cache_dir = '/home/kkitsi/data' # cluster
+    
 
 # Fetches at most N rows for each functionality ID. If a functionality ID has only M<N rows, it fetches them all.
 # The rows could be either clones (fetch_clones=True) or non-clones (fetch_clones=False). Resulting table has columns
 # code1 | code2 | label (0/1) | functionality_id
 def fetch_functionality_data(fetch_clones=True, max_rows_per_functionality=0):
+    
+    # Database connection parameters
+    db_params = {
+        "host"    : "localhost",
+        "database": "bcb",
+        "user"    : "konstantinos",
+        "password": "1234"
+    }
+
+    # Establish connection
+    conn = psycopg2.connect(**db_params)
+
     if fetch_clones:
         tableName   = "clones"
         label_value = 1
