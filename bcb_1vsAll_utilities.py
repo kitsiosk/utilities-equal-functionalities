@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 
-cache_dir = '/Users/konstantinos/Desktop/Clone Generalization-100/binary files/' # my Mac
+cache_dir = '/Users/konstantinos/Desktop/Clone Generalization-100/binary files/bcb_1vsAll/' # my Mac
 if not os.path.isdir(cache_dir):
     cache_dir = '/home/kkitsi/data/equal_func/' # cluster
     
@@ -57,7 +57,7 @@ def fetch_functionality_data(fetch_clones=True, max_rows_per_functionality=0):
     return data
 
 def get_functionality_data(max_rows_per_functionality):
-    data_pairs_all_fname = cache_dir + 'bcb_1vsAll/data_pairs_all_' + str(max_rows_per_functionality) + '.pickle'
+    data_pairs_all_fname = cache_dir + 'data_pairs_all_' + str(max_rows_per_functionality) + '.pickle'
 
     if os.path.isfile(data_pairs_all_fname):
         data_pairs_all = pd.read_pickle(data_pairs_all_fname)
