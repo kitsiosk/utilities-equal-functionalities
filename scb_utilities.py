@@ -48,7 +48,7 @@ def combine_to_create_false_pairs(data_scb):
 
 def get_data_scb():
     # Path to the folder containing .java files
-    folder_path = "/Users/konstantinos/Desktop/Clone Generalization/Semantic Benchmark/Java/Stand Alone Clones" # my Mac
+    folder_path = "/Users/konstantinos/Desktop/Clone Generalization-100/Semantic Benchmark/Java/Stand Alone Clones" # my Mac
     if not os.path.isdir(folder_path):
         folder_path = "/home/kkitsi/data/Semantic Benchmark/Java/Stand Alone Clones" # cluster
 

@@ -1,9 +1,9 @@
 import pandas as pd
 import os
 
-cache_dir = '/Users/konstantinos/Desktop/Clone Generalization/binary files/' # my Mac
+cache_dir = '/Users/konstantinos/Desktop/Clone Generalization-100/binary files/' # my Mac
 if not os.path.isdir(cache_dir):
-    cache_dir = '/home/kkitsi/data/' # cluster
+    cache_dir = '/home/kkitsi/data/equal_func/' # cluster
     
 
 # Fetches at most N rows for each functionality ID. If a functionality ID has only M<N rows, it fetches them all.
@@ -33,6 +33,8 @@ def fetch_functionality_data(fetch_clones=True, max_rows_per_functionality=0):
     # Partition by functionality ID to obtain a row number that resets when functionality changes. Then,
     # fetch all rows with row_num<N
     query = """
+    SELECT setseed(0.42);
+    
     WITH RandomizedRows AS (
       SELECT
         function_id_one, function_id_two, functionality_id, %d as label,
@@ -95,6 +97,11 @@ def get_functionality_data(max_rows_per_functionality):
             )
             for func_id in common_functionality_ids
         ], ignore_index=True)
+
+        # Keep only functionalities with >100 pairs
+        for f,i in data_pairs_all.groupby('functionality_id').size().items():
+            if i < 2*max_rows_per_functionality:
+                data_pairs_all = data_pairs_all[data_pairs_all.functionality_id != f]
 
         data_pairs_all.to_pickle(data_pairs_all_fname)
 
