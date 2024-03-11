@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 
-cache_dir = '/Users/konstantinos/local-desktop/Clones paper replication package/datasets/bcb_v2_sampled_bf/' # my Mac
+cache_dir = '/Users/konstantinos/Desktop/Clone Generalization-100/binary files/bcb_1vsAll/' # my Mac
 if not os.path.isdir(cache_dir):
     cache_dir = '/home/kkitsi/data/equal_func/' # cluster
     
